@@ -93,7 +93,7 @@ Page {
 
     MainMenu {
         id: portalsMenu
-        x: buttonLayout.x + 25
+        x: buttonLayout.x
         y: buttonLayout.y - (count * 40) - 8
 
         Action {
@@ -122,7 +122,7 @@ Page {
 
     MainMenu {
         id: filesystemMenu
-        x: buttonLayout.x + 250 + 75
+        x: buttonLayout.x + 250 + 50
         y: buttonLayout.y - (count * 40) - 8
 
         Action {

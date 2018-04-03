@@ -26,14 +26,14 @@ Menu {
 
     background: Rectangle {
         implicitHeight: menu.count * 40
-        implicitWidth: 200
+        implicitWidth: 250
         color: "#eeeeef"
         radius: 5
     }
 
     delegate: MenuItem {
         id: menuItem
-        implicitWidth: 200
+        implicitWidth: 250
         implicitHeight: 40
 
         arrow: Canvas {
@@ -65,11 +65,11 @@ Menu {
         }
 
         background: Item {
-                implicitWidth: 200
+                implicitWidth: 250
                 implicitHeight: 40
                 Rectangle {
                     anchors.top: parent.top
-                    implicitWidth: 200
+                    implicitWidth: 250
                     implicitHeight: 35
                     color: menuItem.highlighted ? "#006bb1" : "transparent"
                     opacity: enabled ? 1 : 0.3
@@ -78,7 +78,7 @@ Menu {
 
                 Rectangle {
                     anchors.bottom: parent.bottom
-                    implicitWidth: 200
+                    implicitWidth: 250
                     implicitHeight: 35
                     color: menuItem.highlighted ? "#006bb1" : "transparent"
                     opacity: enabled ? 1 : 0.3
