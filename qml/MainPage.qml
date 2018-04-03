@@ -22,10 +22,13 @@ import QtQuick.Dialogs 1.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 
-import org.kde.kirigami 2.3 as Kirigami
-
-Kirigami.Page {
+Page {
     id: mainPage
+
+    Text {
+        id: hiddenText
+        opacity: 0
+    }
 
     background: Rectangle {
         anchors.fill: parent
@@ -34,7 +37,7 @@ Kirigami.Page {
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: Kirigami.Units.smallSpacing
+        spacing: 4
 
         Image {
             Layout.alignment: Qt.AlignHCenter
@@ -44,7 +47,8 @@ Kirigami.Page {
         Label {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             horizontalAlignment: Text.AlignHCenter
-            font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 2.5)
+            color: "white"
+            font.pointSize: Math.round(hiddenText.font.pointSize * 2.5)
             text: qsTr("THE FUTURE OF APPLICATION\nDISTRIBUTION ON LINUX")
         }
 
@@ -90,7 +94,7 @@ Kirigami.Page {
     MainMenu {
         id: portalsMenu
         x: buttonLayout.x + 25
-        y: buttonLayout.y - (count * 40) - Kirigami.Units.largeSpacing
+        y: buttonLayout.y - (count * 40) - 8
 
         Action {
             text: qsTr("Open a File...")
@@ -119,7 +123,7 @@ Kirigami.Page {
     MainMenu {
         id: filesystemMenu
         x: buttonLayout.x + 250 + 75
-        y: buttonLayout.y - (count * 40) - Kirigami.Units.largeSpacing
+        y: buttonLayout.y - (count * 40) - 8
 
         Action {
             text: qsTr("Application Runtime")

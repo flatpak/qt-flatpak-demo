@@ -10,7 +10,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_D
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Quick Widgets)
 
-find_package(KF5 REQUIRED Notifications Kirigami2)
+find_package(KF5 REQUIRED Notifications)
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)

@@ -21,9 +21,7 @@ import QtQuick 2.6
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 
-import org.kde.kirigami 2.3 as Kirigami
-
-Kirigami.ApplicationWindow {
+ApplicationWindow {
     id: root
     visible: true
 
@@ -32,10 +30,7 @@ Kirigami.ApplicationWindow {
 
     title: qsTr("Flatpak Demo")
 
-    pageStack.defaultColumnWidth: root.width
-    pageStack.initialPage: mainPage
-
     MainPage {
-        id: mainPage
+        anchors.fill: parent
     }
 }

@@ -1,16 +1,16 @@
 {
     "app-id": "org.kde.flatpak-demo",
     "runtime": "org.kde.Platform",
-    "runtime-version": "5.9",
+    "runtime-version": "5.10",
     "sdk": "org.kde.Sdk",
-    "command": "portal-test-kde",
+    "command": "flatpak-demo",
+    "rename-icon": "flatpak",
     "finish-args": [
         "--share=ipc",
         "--socket=x11",
         "--socket=wayland",
         "--filesystem=host",
-        "--device=dri",
-        "--talk-name=org.kde.StatusNotifierWatcher"
+        "--device=dri"
     ],
     "build-options" : {
         "cflags": "-O2 -g",
@@ -20,13 +20,26 @@
         }
     },
     "modules": [
+        /* Currently Kirigami 5.44 branch is broken */
+        {
+            "name": "kirigami",
+            "config-opts": ["-DENABLE_TESTING=OFF", "-DCMAKE_INSTALL_LIBDIR=lib", "-DPLASMA_ENABLED=OFF"],
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.kde.org/kirigami.git"
+                }
+            ]
+        },
         {
             "name": "flatpak-demo",
             "cmake": true,
             "sources": [
                 {
                     "type": "git",
-                    "url": "file:///home/jgrulich/development/projects/flatpak/xdg-portal-test-kde/"
+                    "url": "https://github.com/grulja/flatpak-demo.git"
                 }
             ]
         }
