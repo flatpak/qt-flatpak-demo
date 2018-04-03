@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop">
+  <id>org.kde.flatpak-demo.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LGPL-2.0+</project_license>
+  <name>Flatpak demo</name>
+  <summary>Flatpak demo application</summary>
+  <description>
+      <p>Flatpak demo application</p>
+  </description>
+  <url type="bugtracker">https://github.com/flatpak/flatpak/issues</url>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>flatpak-demo</binary>
+  </provides>
+</component>

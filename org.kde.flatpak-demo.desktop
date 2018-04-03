@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Flatpak demo
+GenericName=Flatpak demo
+Comment=Flatpak demo application
+Exec=flatpak-demo
+Terminal=false
+Icon=flatpak
+Type=Application
+X-KDE-PluginInfo-Website=http://flatpak.org
+Categories=Qt;KDE;Flatpak;

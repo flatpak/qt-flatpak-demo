@@ -1,0 +1,35 @@
+{
+    "app-id": "org.kde.flatpak-demo",
+    "runtime": "org.kde.Platform",
+    "runtime-version": "5.9",
+    "sdk": "org.kde.Sdk",
+    "command": "portal-test-kde",
+    "finish-args": [
+        "--share=ipc",
+        "--socket=x11",
+        "--socket=wayland",
+        "--filesystem=host",
+        "--device=dri",
+        "--talk-name=org.kde.StatusNotifierWatcher"
+    ],
+    "build-options" : {
+        "cflags": "-O2 -g",
+        "cxxflags": "-O2 -g",
+        "env": {
+            "V": "1"
+        }
+    },
+    "modules": [
+        {
+            "name": "flatpak-demo",
+            "cmake": true,
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "file:///home/jgrulich/development/projects/flatpak/xdg-portal-test-kde/"
+                }
+            ]
+        }
+    ]
+}
+
