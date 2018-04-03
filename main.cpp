@@ -21,6 +21,7 @@
 
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QtQuickControls2/QQuickStyle>
 
 #include "flatpakdemo.h"
 
@@ -31,6 +32,8 @@ int main(int argc, char **argv)
     QApplication::setOrganizationDomain("kde.org");
     QApplication::setOrganizationName("kde.org");
     QApplication::setApplicationName("flatpak-demo");
+
+    QQuickStyle::setStyle(QLatin1String("org.kde.desktop"));
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("flatpakDemo", new FlatpakDemo());
