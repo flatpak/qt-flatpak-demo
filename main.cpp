@@ -29,8 +29,8 @@ int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
 
-    QApplication::setOrganizationDomain("kde.org");
-    QApplication::setOrganizationName("kde.org");
+    QApplication::setOrganizationDomain("flatpak.org");
+    QApplication::setOrganizationName("flatpak.org");
     QApplication::setApplicationName("flatpak-demo");
 
     QQuickStyle::setStyle(QLatin1String("org.kde.desktop"));

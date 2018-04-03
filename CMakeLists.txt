@@ -36,5 +36,5 @@ target_link_libraries(flatpak-demo LINK_PUBLIC Qt5::QuickControls2 Qt5::Widgets 
 
 install(TARGETS flatpak-demo ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install(PROGRAMS org.kde.flatpak-demo.desktop  DESTINATION ${KDE_INSTALL_APPDIR})
-install(FILES org.kde.flatpak-demo.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+install(PROGRAMS org.flatpak.demo.desktop  DESTINATION ${KDE_INSTALL_APPDIR})
+install(FILES org.flatpak.demo.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
