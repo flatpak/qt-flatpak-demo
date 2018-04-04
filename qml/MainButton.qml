@@ -52,9 +52,9 @@ Button {
         onPaint: {
             var ctx = getContext("2d")
             ctx.fillStyle = control.down ? "black" : "white"
-            ctx.moveTo(15, 15)
-            ctx.lineTo(width - 15, 15)
-            ctx.lineTo((width / 2), height - 20)
+            ctx.moveTo(15, 17)
+            ctx.lineTo(25, 17)
+            ctx.lineTo(20, 22)
             ctx.closePath()
             ctx.fill()
         }
