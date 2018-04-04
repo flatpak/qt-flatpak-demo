@@ -37,19 +37,25 @@ Page {
 
     ColumnLayout {
         anchors.fill: parent
+        anchors.bottomMargin: 10
         spacing: 4
 
-        Image {
+        ColumnLayout {
+            spacing: 40
             Layout.alignment: Qt.AlignHCenter
-            source: "qrc:/assets/logo"
-        }
 
-        Label {
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-            horizontalAlignment: Text.AlignHCenter
-            color: "white"
-            font.pointSize: Math.round(hiddenText.font.pointSize * 2.5)
-            text: qsTr("THE FUTURE OF APPLICATION\nDISTRIBUTION ON LINUX")
+            Image {
+                Layout.alignment: Qt.AlignHCenter
+                source: "qrc:/assets/logo"
+            }
+
+            Label {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                horizontalAlignment: Text.AlignHCenter
+                color: "white"
+                font.pointSize: Math.round(hiddenText.font.pointSize * 2.5)
+                text: qsTr("THE FUTURE OF APPLICATION\nDISTRIBUTION ON LINUX")
+            }
         }
 
         RowLayout {
@@ -108,6 +114,7 @@ Page {
 
         Action {
             text: qsTr("Print...")
+            onTriggered: printFileDialog.open()
         }
 
         Action {
@@ -141,11 +148,52 @@ Page {
 
     FileDialog {
         id: fileDialog
-        title: qsTr("Please choose a file")
         folder: shortcuts.home
+        selectMultiple: false
+        title: qsTr("Please choose a file")
 
         onAccepted: {
-            console.error("Selected: " + fileDialog.fileUrls)
+            footer.notify(qsTr("File " + fileUrl + " selected"))
+        }
+    }
+
+    FileDialog {
+        id: printFileDialog
+        folder: shortcuts.pictures
+        nameFilters: [ "Image files (*.jpg *.png)"]
+        selectMultiple: false
+        title: qsTr("Please choose image file to print")
+
+        onAccepted: {
+            flatpakDemo.printFile(fileUrl)
+        }
+    }
+
+    footer: Rectangle {
+        id: footer
+        implicitHeight: 40
+        implicitWidth: parent.width
+        opacity: timer.running ? 1 : 0
+        color: "#eeeeef"
+
+        Behavior on opacity { PropertyAnimation { duration: 500 } }
+
+        Text {
+            id: footerText
+            anchors.fill: parent
+            color: "black"
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        Timer {
+            id: timer
+            interval: 5000
+        }
+
+        function notify(text) {
+            footerText.text = text
+            timer.start()
         }
     }
 }

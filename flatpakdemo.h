@@ -30,8 +30,17 @@ public:
     virtual ~FlatpakDemo();
 
     Q_INVOKABLE void sendNotification();
-private:
+    Q_INVOKABLE void printFile(const QUrl &file);
 
+private Q_SLOTS:
+    void gotPrintResponse(uint response, const QVariantMap &results);
+    void gotPreparePrintResponse(uint response, const QVariantMap &results);
+
+    QString getRequestToken();
+
+private:
+    QString m_fileToPrint;
+    uint m_requestTokenCounter = 0;
 };
 
 #endif // FLATPAK_DEMO_H
