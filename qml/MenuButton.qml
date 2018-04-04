@@ -26,8 +26,8 @@ Button {
 
     down: false
 
-    implicitWidth: 250
-    implicitHeight: 40
+    implicitWidth: root.componentWidth
+    implicitHeight: root.componentHeight
 
     background: Rectangle {
         opacity: enabled ? 1 : 0.3
@@ -47,8 +47,8 @@ Button {
     Canvas {
         id: canvas
         x: parent.width - width
-        implicitWidth: 40
-        implicitHeight: 40
+        implicitWidth: root.componentHeight
+        implicitHeight: root.componentHeight
         onPaint: {
             var ctx = getContext("2d")
             ctx.fillStyle = control.down ? "black" : "white"

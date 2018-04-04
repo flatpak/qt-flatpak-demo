@@ -25,21 +25,21 @@ Menu {
     id: menu
 
     background: Rectangle {
-        implicitHeight: menu.count * 40
-        implicitWidth: 250
+        implicitHeight: menu.count * root.componentHeight
+        implicitWidth: root.componentWidth
         color: "#eeeeef"
         radius: 5
     }
 
     delegate: MenuItem {
         id: menuItem
-        implicitWidth: 250
-        implicitHeight: 40
+        implicitWidth: root.componentWidth
+        implicitHeight: root.componentHeight
 
         arrow: Canvas {
             x: parent.width - width
-            implicitWidth: 40
-            implicitHeight: 40
+            implicitWidth: root.componentHeight
+            implicitHeight: root.componentHeight
             visible: menuItem.subMenu
             onPaint: {
                 var ctx = getContext("2d")
@@ -65,12 +65,12 @@ Menu {
         }
 
         background: Item {
-                implicitWidth: 250
-                implicitHeight: 40
+                implicitWidth: root.componentWidth
+                implicitHeight: root.componentHeight
                 Rectangle {
                     anchors.top: parent.top
-                    implicitWidth: 250
-                    implicitHeight: 35
+                    implicitWidth: root.componentWidth
+                    implicitHeight: root.componentHeight - 5
                     color: menuItem.highlighted ? "#006bb1" : "transparent"
                     opacity: enabled ? 1 : 0.3
                     radius: menu.currentIndex == 0 ? 5 : 0
@@ -78,8 +78,8 @@ Menu {
 
                 Rectangle {
                     anchors.bottom: parent.bottom
-                    implicitWidth: 250
-                    implicitHeight: 35
+                    implicitWidth: root.componentWidth
+                    implicitHeight: root.componentHeight - 5
                     color: menuItem.highlighted ? "#006bb1" : "transparent"
                     opacity: enabled ? 1 : 0.3
                     radius: menu.currentIndex == menu.count - 1 ? 5 : 0

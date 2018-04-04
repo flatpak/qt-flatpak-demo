@@ -23,14 +23,16 @@ import QtQuick.Controls 2.3
 
 ApplicationWindow {
     id: root
-    visible: true
+
+    property variant fontMetrics: TextMetrics { text: "M" }
+    property int componentHeight: 40
+    property int componentWidth: 250
+    property int spacing: Math.floor(fontMetrics.height / 2)
 
     width: 800
     height: 640
-
+    visible: true
     title: qsTr("Flatpak Demo")
 
-    DemoPage {
-        anchors.fill: parent
-    }
+    DemoPage { anchors.fill: parent }
 }

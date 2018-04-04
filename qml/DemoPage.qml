@@ -25,11 +25,6 @@ import QtQuick.Controls 2.3
 Page {
     id: mainPage
 
-    Text {
-        id: hiddenText
-        opacity: 0
-    }
-
     background: Rectangle {
         anchors.fill: parent
         color: "#2290d9"
@@ -37,11 +32,10 @@ Page {
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.bottomMargin: 10
-        spacing: 4
+        anchors.bottomMargin: root.spacing
 
         ColumnLayout {
-            spacing: 40
+            spacing: root.spacing * 4
             Layout.alignment: Qt.AlignHCenter
 
             Image {
@@ -53,7 +47,7 @@ Page {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                 horizontalAlignment: Text.AlignHCenter
                 color: "white"
-                font.pointSize: Math.round(hiddenText.font.pointSize * 2.5)
+                font.pointSize: Math.round(root.fontMetrics.font.pointSize * 2.5)
                 text: qsTr("THE FUTURE OF APPLICATION\nDISTRIBUTION ON LINUX")
             }
         }
@@ -61,7 +55,7 @@ Page {
         RowLayout {
             id: buttonLayout
             Layout.alignment: Qt.AlignHCenter
-            spacing: 50
+            spacing: root.spacing * 4
 
             MenuButton {
                 id: portalsButton
@@ -100,7 +94,7 @@ Page {
     ButtonMenu {
         id: portalsMenu
         x: buttonLayout.x
-        y: buttonLayout.y - (count * 40) - 8
+        y: buttonLayout.y - (count * root.componentHeight) - root.spacing
 
         Action {
             text: qsTr("Open a File...")
@@ -129,8 +123,8 @@ Page {
 
     ButtonMenu {
         id: filesystemMenu
-        x: buttonLayout.x + 250 + 50
-        y: buttonLayout.y - (count * 40) - 8
+        x: buttonLayout.x + root.componentWidth + (root.spacing * 4)
+        y: buttonLayout.y - (count * root.componentHeight) - root.spacing
 
         Action {
             text: qsTr("Application Runtime")
@@ -171,12 +165,12 @@ Page {
 
     footer: Rectangle {
         id: footer
-        implicitHeight: 40
+        implicitHeight: root.componentHeight
         implicitWidth: parent.width
         opacity: timer.running ? 1 : 0
         color: "#eeeeef"
 
-        Behavior on opacity { PropertyAnimation { duration: 500 } }
+        Behavior on opacity { PropertyAnimation { } }
 
         Text {
             id: footerText
@@ -197,6 +191,3 @@ Page {
         }
     }
 }
-
-
-
