@@ -57,7 +57,7 @@ Page {
             Layout.alignment: Qt.AlignHCenter
             spacing: 50
 
-            MainButton {
+            MenuButton {
                 id: portalsButton
                 text: qsTr("Portals")
 
@@ -73,7 +73,7 @@ Page {
                 }
             }
 
-            MainButton {
+            MenuButton {
                 id: filesystemButton
                 text: qsTr("View Filesystem")
 
@@ -91,7 +91,7 @@ Page {
         }
     }
 
-    MainMenu {
+    ButtonMenu {
         id: portalsMenu
         x: buttonLayout.x
         y: buttonLayout.y - (count * 40) - 8
@@ -120,7 +120,7 @@ Page {
         }
     }
 
-    MainMenu {
+    ButtonMenu {
         id: filesystemMenu
         x: buttonLayout.x + 250 + 50
         y: buttonLayout.y - (count * 40) - 8

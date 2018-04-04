@@ -30,7 +30,7 @@ ApplicationWindow {
 
     title: qsTr("Flatpak Demo")
 
-    MainPage {
+    DemoPage {
         anchors.fill: parent
     }
 }

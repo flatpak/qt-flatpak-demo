@@ -1,8 +1,8 @@
 <RCC>
   <qresource prefix="/">
-    <file>qml/MainButton.qml</file>
-    <file>qml/MainMenu.qml</file>
-    <file>qml/MainPage.qml</file>
+    <file>qml/ButtonMenu.qml</file>
+    <file>qml/DemoPage.qml</file>
+    <file>qml/MenuButton.qml</file>
     <file>qml/main.qml</file>
   </qresource>
 </RCC>
