@@ -143,7 +143,7 @@ void FlatpakDemo::gotPreparePrintResponse(uint response, const QVariantMap &resu
                                                               QLatin1String("org.freedesktop.portal.Print"),
                                                               QLatin1String("Print"));
 
-        message << QLatin1String("X11:") << QLatin1String("Print dialog") << QVariant::fromValue<QDBusUnixFileDescriptor>(descriptor) << QVariantMap{{QLatin1String("token"), results.value(QLatin1String("token")).toUInt()}};
+        message << QLatin1String("X11:") << QLatin1String("Print dialog") << QVariant::fromValue<QDBusUnixFileDescriptor>(descriptor) << QVariantMap{{QLatin1String("handle_token"), getRequestToken()}, {QLatin1String("token"), results.value(QLatin1String("token")).toUInt()}};
 
         QDBusPendingCall pendingCall = QDBusConnection::sessionBus().asyncCall(message);
         QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pendingCall);
