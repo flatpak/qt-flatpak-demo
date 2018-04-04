@@ -31,7 +31,7 @@ Button {
 
     background: Rectangle {
         opacity: enabled ? 1 : 0.3
-        color: control.down ? "#eeeeef" : "#006bb1"
+        color: control.down ? root.componentHighlightColor : root.componentBackgroundColor
         radius: 5
     }
 

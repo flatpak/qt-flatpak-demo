@@ -27,7 +27,7 @@ Menu {
     background: Rectangle {
         implicitHeight: menu.count * root.componentHeight
         implicitWidth: root.componentWidth
-        color: "#eeeeef"
+        color: root.componentHighlightColor
         radius: 5
     }
 
@@ -43,7 +43,7 @@ Menu {
             visible: menuItem.subMenu
             onPaint: {
                 var ctx = getContext("2d")
-                ctx.fillStyle = menuItem.highlighted ? "#ffffff" : "#21be2b"
+                ctx.fillStyle = menuItem.highlighted ? "white" : "black"
                 ctx.moveTo(15, 15)
                 ctx.lineTo(width - 15, height / 2)
                 ctx.lineTo(15, height - 15)
@@ -58,7 +58,7 @@ Menu {
             text: menuItem.text
             font: menuItem.font
             opacity: enabled ? 1.0 : 0.3
-            color: menuItem.highlighted ? "#ffffff" : "#000000"
+            color: menuItem.highlighted ? "white" : "black"
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
@@ -71,7 +71,7 @@ Menu {
                     anchors.top: parent.top
                     implicitWidth: root.componentWidth
                     implicitHeight: root.componentHeight - 5
-                    color: menuItem.highlighted ? "#006bb1" : "transparent"
+                    color: menuItem.highlighted ? root.componentBackgroundColor : "transparent"
                     opacity: enabled ? 1 : 0.3
                     radius: menu.currentIndex == 0 ? 5 : 0
                 }
@@ -80,7 +80,7 @@ Menu {
                     anchors.bottom: parent.bottom
                     implicitWidth: root.componentWidth
                     implicitHeight: root.componentHeight - 5
-                    color: menuItem.highlighted ? "#006bb1" : "transparent"
+                    color: menuItem.highlighted ? root.componentBackgroundColor : "transparent"
                     opacity: enabled ? 1 : 0.3
                     radius: menu.currentIndex == menu.count - 1 ? 5 : 0
                 }

@@ -28,6 +28,9 @@ ApplicationWindow {
     property int componentHeight: 40
     property int componentWidth: 250
     property int spacing: Math.floor(fontMetrics.height / 2)
+    property string backgroundColor: "#2290d9"
+    property string componentBackgroundColor: "#006bb1"
+    property string componentHighlightColor: "#eeeeef"
 
     width: 800
     height: 640

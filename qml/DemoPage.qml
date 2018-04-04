@@ -27,7 +27,7 @@ Page {
 
     background: Rectangle {
         anchors.fill: parent
-        color: "#2290d9"
+        color: root.backgroundColor
     }
 
     ColumnLayout {
@@ -168,7 +168,7 @@ Page {
         implicitHeight: root.componentHeight
         implicitWidth: parent.width
         opacity: timer.running ? 1 : 0
-        color: "#eeeeef"
+        color: root.componentHighlightColor
 
         Behavior on opacity { PropertyAnimation { } }
 
