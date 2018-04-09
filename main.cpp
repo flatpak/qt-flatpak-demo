@@ -35,9 +35,15 @@ int main(int argc, char **argv)
 
     QQuickStyle::setStyle(QLatin1String("org.kde.desktop"));
 
+    FlatpakDemo *flatpakDemo = new FlatpakDemo();
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("flatpakDemo", new FlatpakDemo());
+    engine.rootContext()->setContextProperty("flatpakDemo", flatpakDemo);
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
+
+    QObject *rootObject = engine.rootObjects().first();
+    QObject::connect(flatpakDemo, &FlatpakDemo::screenshotSaved, [rootObject] (const QString &path) {
+        QMetaObject::invokeMethod(rootObject, "onScreenshotSaved", Q_ARG(QVariant, path));
+    });
 
     return app.exec();
 }

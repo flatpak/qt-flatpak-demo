@@ -60,7 +60,7 @@ void FlatpakDemo::printFile(const QUrl &file)
                                                           QLatin1String("org.freedesktop.portal.Print"),
                                                           QLatin1String("PreparePrint"));
     // TODO add some default configuration to verify it's read/parsed properly
-    message << QLatin1String("X11:") << QLatin1String("Prepare print") << QVariantMap() << QVariantMap() << QVariantMap{{QLatin1String("handle_token"), getRequestToken()}};
+    message << QLatin1String("x11:") << QLatin1String("Prepare print") << QVariantMap() << QVariantMap() << QVariantMap{{QLatin1String("handle_token"), getRequestToken()}};
 
     QDBusPendingCall pendingCall = QDBusConnection::sessionBus().asyncCall(message);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pendingCall);
@@ -80,10 +80,39 @@ void FlatpakDemo::printFile(const QUrl &file)
     });
 }
 
+void FlatpakDemo::takeScreenshot()
+{
+    QDBusMessage message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.portal.Desktop"),
+                                                          QLatin1String("/org/freedesktop/portal/desktop"),
+                                                          QLatin1String("org.freedesktop.portal.Screenshot"),
+                                                          QLatin1String("Screenshot"));
+    // TODO add some default configuration to verify it's read/parsed properly
+    message << QLatin1String("x11:") << QVariantMap{{QLatin1String("interactive"), true}, {QLatin1String("handle_token"), getRequestToken()}};
+
+    QDBusPendingCall pendingCall = QDBusConnection::sessionBus().asyncCall(message);
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pendingCall);
+    connect(watcher, &QDBusPendingCallWatcher::finished, [this] (QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<QDBusObjectPath> reply = *watcher;
+        if (reply.isError()) {
+            qWarning() << "Couldn't get reply";
+            qWarning() << "Error: " << reply.error().message();
+        } else {
+            QDBusConnection::sessionBus().connect(QString(),
+                                                  reply.value().path(),
+                                                  QLatin1String("org.freedesktop.portal.Request"),
+                                                  QLatin1String("Response"),
+                                                  this,
+                                                  SLOT(gotScreenshotResponse(uint,QVariantMap)));
+        }
+    });
+}
+
 void FlatpakDemo::gotPrintResponse(uint response, const QVariantMap &results)
 {
-    // TODO do cleaning
-    qWarning() << "Print response: " << response << results;
+    // qWarning() << "Print response: " << response << results;
+    if (response) {
+        qWarning() << "Failed to print " << m_fileToPrint;
+    }
 }
 
 void FlatpakDemo::gotPreparePrintResponse(uint response, const QVariantMap &results)
@@ -106,6 +135,8 @@ void FlatpakDemo::gotPreparePrintResponse(uint response, const QVariantMap &resu
         }
 
         QPdfWriter writer(tempFile.fileName());
+        writer.setResolution(150);
+
         QPainter painter(&writer);
 
         if (pageSetup.contains(QLatin1String("Orientation"))) {
@@ -132,7 +163,10 @@ void FlatpakDemo::gotPreparePrintResponse(uint response, const QVariantMap &resu
 
         writer.setPageSize(QPagedPaintDevice::A4);
 
-        painter.drawPixmap(QPoint(0,0), QPixmap(m_fileToPrint));
+        QPixmap pixmap(m_fileToPrint);
+        painter.setViewport(0, 0, pixmap.width(), pixmap.height());
+        painter.setWindow(pixmap.rect());
+        painter.drawPixmap(QPoint(0,0), pixmap);
         painter.end();
 
         // Send it back for printing
@@ -143,7 +177,7 @@ void FlatpakDemo::gotPreparePrintResponse(uint response, const QVariantMap &resu
                                                               QLatin1String("org.freedesktop.portal.Print"),
                                                               QLatin1String("Print"));
 
-        message << QLatin1String("X11:") << QLatin1String("Print dialog") << QVariant::fromValue<QDBusUnixFileDescriptor>(descriptor) << QVariantMap{{QLatin1String("handle_token"), getRequestToken()}, {QLatin1String("token"), results.value(QLatin1String("token")).toUInt()}};
+        message << QLatin1String("x11:") << QLatin1String("Print dialog") << QVariant::fromValue<QDBusUnixFileDescriptor>(descriptor) << QVariantMap{{QLatin1String("handle_token"), getRequestToken()}, {QLatin1String("token"), results.value(QLatin1String("token")).toUInt()}};
 
         QDBusPendingCall pendingCall = QDBusConnection::sessionBus().asyncCall(message);
         QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pendingCall);
@@ -163,6 +197,18 @@ void FlatpakDemo::gotPreparePrintResponse(uint response, const QVariantMap &resu
         });
     } else {
         qWarning() << "Failed to print selected document";
+    }
+}
+
+void FlatpakDemo::gotScreenshotResponse(uint response, const QVariantMap &results)
+{
+    // qWarning() << "Screenshot response: " << response << results;
+    if (!response) {
+        if (results.contains(QLatin1String("uri"))) {
+            Q_EMIT screenshotSaved(results.value(QLatin1String("uri")).toString());
+        }
+    } else {
+        qWarning() << "Failed to take screenshot";
     }
 }
 

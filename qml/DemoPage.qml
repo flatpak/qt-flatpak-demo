@@ -23,7 +23,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 
 Page {
-    id: mainPage
+    id: demoPage
 
     background: Rectangle {
         anchors.fill: parent
@@ -113,6 +113,7 @@ Page {
 
         Action {
             text: qsTr("Take Screenshot")
+            onTriggered: flatpakDemo.takeScreenshot()
         }
 
         onClosed: {
@@ -147,7 +148,7 @@ Page {
         title: qsTr("Please choose a file")
 
         onAccepted: {
-            footer.notify(qsTr("File " + fileUrl + " selected"))
+            demoPage.notify(qsTr("File " + fileUrl + " selected"))
         }
     }
 
@@ -184,10 +185,10 @@ Page {
             id: timer
             interval: 5000
         }
+    }
 
-        function notify(text) {
-            footerText.text = text
-            timer.start()
-        }
+    function notify(text) {
+        footerText.text = text
+        timer.start()
     }
 }

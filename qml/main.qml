@@ -37,5 +37,9 @@ ApplicationWindow {
     visible: true
     title: qsTr("Flatpak Demo")
 
-    DemoPage { anchors.fill: parent }
+    DemoPage { id: demoPage; anchors.fill: parent }
+
+    function onScreenshotSaved(path) {
+        demoPage.notify(qsTr("Screenshot saved to ") + path)
+    }
 }

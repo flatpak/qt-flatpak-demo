@@ -31,12 +31,17 @@ public:
 
     Q_INVOKABLE void sendNotification();
     Q_INVOKABLE void printFile(const QUrl &file);
+    Q_INVOKABLE void takeScreenshot();
 
 private Q_SLOTS:
     void gotPrintResponse(uint response, const QVariantMap &results);
     void gotPreparePrintResponse(uint response, const QVariantMap &results);
+    void gotScreenshotResponse(uint response, const QVariantMap &results);
 
     QString getRequestToken();
+
+Q_SIGNALS:
+    void screenshotSaved(const QString &path);
 
 private:
     QString m_fileToPrint;
