@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/">
+    <file>qml/BaseButton.qml</file>
     <file>qml/ButtonMenu.qml</file>
     <file>qml/DemoPage.qml</file>
     <file>qml/MenuButton.qml</file>

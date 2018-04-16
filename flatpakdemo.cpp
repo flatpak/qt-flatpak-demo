@@ -21,12 +21,16 @@
 
 #include <KNotification>
 
+#include <QDesktopServices>
 #include <QDBusArgument>
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QDBusUnixFileDescriptor>
+#include <QDesktopServices>
 #include <QPainter>
 #include <QPdfWriter>
+#include <QSettings>
+#include <QStandardPaths>
 #include <QTemporaryFile>
 
 #include <QDebug>
@@ -105,6 +109,14 @@ void FlatpakDemo::takeScreenshot()
                                                   SLOT(gotScreenshotResponse(uint,QVariantMap)));
         }
     });
+}
+
+void FlatpakDemo::openApplicationData()
+{
+    QSettings setting(QLatin1String("/.flatpak-info"), QSettings::IniFormat);
+    QDesktopServices::openUrl(QUrl(QStringLiteral("file://") +
+                                   setting.value(QLatin1String("Instance/instance-path"),
+                                                 QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first() + QStringLiteral("/.var/app/org.flatpak.demo/")).toString()));
 }
 
 void FlatpakDemo::gotPrintResponse(uint response, const QVariantMap &results)

@@ -21,28 +21,24 @@ import QtQuick 2.6
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 
-BaseButton {
+Button {
     id: control
 
-    down: false
+    implicitWidth: root.componentWidth
+    implicitHeight: root.componentHeight
 
-    Canvas {
-        id: canvas
-        x: parent.width - width
-        implicitWidth: root.componentHeight
-        implicitHeight: root.componentHeight
-        onPaint: {
-            var ctx = getContext("2d")
-            ctx.fillStyle = control.down ? "black" : "white"
-            ctx.moveTo(15, 17)
-            ctx.lineTo(25, 17)
-            ctx.lineTo(20, 22)
-            ctx.closePath()
-            ctx.fill()
-        }
+    background: Rectangle {
+        opacity: enabled ? 1 : 0.3
+        color: control.down ? root.componentHighlightColor : root.componentBackgroundColor
+        radius: 5
     }
 
-    function repaint() {
-        canvas.requestPaint()
+    contentItem: Text {
+        anchors.fill: parent
+        text: control.text
+        font: control.font
+        color: control.down ? "black" : "white"
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
     }
 }

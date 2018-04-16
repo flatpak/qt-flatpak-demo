@@ -32,6 +32,7 @@ public:
     Q_INVOKABLE void sendNotification();
     Q_INVOKABLE void printFile(const QUrl &file);
     Q_INVOKABLE void takeScreenshot();
+    Q_INVOKABLE void openApplicationData();
 
 private Q_SLOTS:
     void gotPrintResponse(uint response, const QVariantMap &results);

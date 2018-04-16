@@ -73,19 +73,12 @@ Page {
                 }
             }
 
-            MenuButton {
+            BaseButton {
                 id: filesystemButton
-                text: qsTr("View Filesystem")
+                text: qsTr("Application Data")
 
                onPressed: {
-                    if (down) {
-                        down = false
-                        filesystemMenu.close()
-                    } else {
-                        down = true
-                        filesystemMenu.open()
-                    }
-                    repaint()
+                    flatpakDemo.openApplicationData();
                 }
             }
         }
@@ -119,25 +112,6 @@ Page {
         onClosed: {
             portalsButton.down = false
             portalsButton.repaint()
-        }
-    }
-
-    ButtonMenu {
-        id: filesystemMenu
-        x: buttonLayout.x + root.componentWidth + (root.spacing * 4)
-        y: buttonLayout.y - (count * root.componentHeight) - root.spacing
-
-        Action {
-            text: qsTr("Application Runtime")
-        }
-
-        Action {
-            text: qsTr("Application Data")
-        }
-
-        onClosed: {
-            filesystemButton.down = false
-            filesystemButton.repaint()
         }
     }
 
