@@ -119,7 +119,7 @@ Page {
         id: fileDialog
         folder: shortcuts.home
         selectMultiple: false
-        title: qsTr("Please choose a file")
+        title: qsTr("Select a File")
 
         onAccepted: {
             demoPage.notify(fileUrl)
