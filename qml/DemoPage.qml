@@ -122,7 +122,7 @@ Page {
         title: qsTr("Please choose a file")
 
         onAccepted: {
-            demoPage.notify(qsTr("File " + fileUrl + " selected"))
+            demoPage.notify(fileUrl)
         }
     }
 
