@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Flatpak demo
-GenericName=Flatpak demo
+Name=Flatpak Demo
+GenericName=Flatpak Demo
 Comment=Flatpak demo application
 Exec=flatpak-demo
 Terminal=false
