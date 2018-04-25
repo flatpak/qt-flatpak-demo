@@ -20,18 +20,21 @@
 #include "flatpakdemo.h"
 
 #include <KNotification>
-
 #include <QDesktopServices>
 #include <QDBusArgument>
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QDBusUnixFileDescriptor>
 #include <QDesktopServices>
+#include <QFileInfo>
 #include <QPainter>
 #include <QPdfWriter>
 #include <QSettings>
 #include <QStandardPaths>
 #include <QTemporaryFile>
+
+#include <fcntl.h>
+#include <QtCore/private/qcore_unix_p.h>
 
 #include <QDebug>
 
@@ -55,10 +58,8 @@ void FlatpakDemo::sendNotification()
     notify->sendEvent();
 }
 
-void FlatpakDemo::printFile(const QUrl &file)
+void FlatpakDemo::printFile()
 {
-    m_fileToPrint = file.toLocalFile();
-
     QDBusMessage message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.portal.Desktop"),
                                                           QLatin1String("/org/freedesktop/portal/desktop"),
                                                           QLatin1String("org.freedesktop.portal.Print"),
@@ -123,66 +124,22 @@ void FlatpakDemo::gotPrintResponse(uint response, const QVariantMap &results)
 {
     // qWarning() << "Print response: " << response << results;
     if (response) {
-        qWarning() << "Failed to print " << m_fileToPrint;
+        qWarning() << "Failed to print Flatpak Cheat Sheet";
     }
 }
 
 void FlatpakDemo::gotPreparePrintResponse(uint response, const QVariantMap &results)
 {
     if (!response) {
-        QVariantMap settings;
-        QVariantMap pageSetup;
-
-        QDBusArgument dbusArgument = results.value(QLatin1String("settings")).value<QDBusArgument>();
-        dbusArgument >> settings;
-
-        QDBusArgument dbusArgument1 = results.value(QLatin1String("page-setup")).value<QDBusArgument>();
-        dbusArgument1 >> pageSetup;
-
-        QTemporaryFile tempFile;
-        tempFile.setAutoRemove(false);
-        if (!tempFile.open()) {
-            qWarning() << "Couldn't generate pdf file";
+        QDBusUnixFileDescriptor descriptor;
+        const int fd = qt_safe_open("/app/share/org.flatpak.demo/flatpak-print-cheatsheet.pdf", O_RDONLY | O_CLOEXEC);
+        if (fd == -1) {
+            qWarning() << "Failed to open flatpak cheatsheet pdf file";
             return;
         }
 
-        QPdfWriter writer(tempFile.fileName());
-        writer.setResolution(150);
-
-        QPainter painter(&writer);
-
-        if (pageSetup.contains(QLatin1String("Orientation"))) {
-            const QString orientation = pageSetup.value(QLatin1String("Orientation")).toString();
-            if (orientation == QLatin1String("portrait") || orientation == QLatin1String("revers-portrait")) {
-                writer.setPageOrientation(QPageLayout::Portrait);
-            } else if (orientation == QLatin1String("landscape") || orientation == QLatin1String("reverse-landscape")) {
-                writer.setPageOrientation(QPageLayout::Landscape);
-            }
-        }
-
-        if (pageSetup.contains(QLatin1String("MarginTop")) &&
-            pageSetup.contains(QLatin1String("MarginBottom")) &&
-            pageSetup.contains(QLatin1String("MarginLeft")) &&
-            pageSetup.contains(QLatin1String("MarginRight"))) {
-            const int marginTop = pageSetup.value(QLatin1String("MarginTop")).toInt();
-            const int marginBottom = pageSetup.value(QLatin1String("MarginBottom")).toInt();
-            const int marginLeft = pageSetup.value(QLatin1String("MarginLeft")).toInt();
-            const int marginRight = pageSetup.value(QLatin1String("MarginRight")).toInt();
-            writer.setPageMargins(QMarginsF(marginLeft, marginTop, marginRight, marginBottom), QPageLayout::Millimeter);
-        }
-
-        // TODO num-copies, pages
-
-        writer.setPageSize(QPagedPaintDevice::A4);
-
-        QPixmap pixmap(m_fileToPrint);
-        painter.setViewport(0, 0, pixmap.width(), pixmap.height());
-        painter.setWindow(pixmap.rect());
-        painter.drawPixmap(QPoint(0,0), pixmap);
-        painter.end();
-
-        // Send it back for printing
-        QDBusUnixFileDescriptor descriptor(tempFile.handle());
+        descriptor.setFileDescriptor(fd);
+        qt_safe_close(fd);
 
         QDBusMessage message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.portal.Desktop"),
                                                               QLatin1String("/org/freedesktop/portal/desktop"),

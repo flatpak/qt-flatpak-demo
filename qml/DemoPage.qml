@@ -101,7 +101,7 @@ Page {
 
         Action {
             text: qsTr("Print...")
-            onTriggered: printFileDialog.open()
+            onTriggered: flatpakDemo.printFile()
         }
 
         Action {
@@ -123,18 +123,6 @@ Page {
 
         onAccepted: {
             demoPage.notify(fileUrl)
-        }
-    }
-
-    FileDialog {
-        id: printFileDialog
-        folder: shortcuts.pictures
-        nameFilters: [ "Image files (*.jpg *.png)"]
-        selectMultiple: false
-        title: qsTr("Please choose image file to print")
-
-        onAccepted: {
-            flatpakDemo.printFile(fileUrl)
         }
     }
 

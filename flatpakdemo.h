@@ -30,7 +30,7 @@ public:
     virtual ~FlatpakDemo();
 
     Q_INVOKABLE void sendNotification();
-    Q_INVOKABLE void printFile(const QUrl &file);
+    Q_INVOKABLE void printFile();
     Q_INVOKABLE void takeScreenshot();
     Q_INVOKABLE void openApplicationData();
 
@@ -45,7 +45,6 @@ Q_SIGNALS:
     void screenshotSaved(const QString &path);
 
 private:
-    QString m_fileToPrint;
     uint m_requestTokenCounter = 0;
 };
 

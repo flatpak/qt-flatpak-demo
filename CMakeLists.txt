@@ -20,6 +20,8 @@ include(ECMInstallIcons)
 include(ECMPackageConfigHelpers)
 include(ECMOptionalAddSubdirectory)
 
+include_directories(${Qt5Core_PRIVATE_INCLUDE_DIRS})
+
 add_subdirectory(icons)
 
 qt5_add_resources(flatpak_demo_SRCS assets.qrc)
@@ -34,7 +36,8 @@ set_target_properties(flatpak-demo PROPERTIES INSTALL_RPATH ${CMAKE_INSTALL_FULL
 
 target_link_libraries(flatpak-demo LINK_PUBLIC Qt5::QuickControls2 Qt5::Widgets Qt5::Quick Qt5::DBus Qt5::Core KF5::Notifications)
 
-install(TARGETS flatpak-demo ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS flatpak-demo ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(PROGRAMS org.flatpak.demo.desktop  DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.flatpak.demo.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+install(FILES flatpak-print-cheatsheet.pdf DESTINATION ${DATA_INSTALL_DIR}/org.flatpak.demo/)
