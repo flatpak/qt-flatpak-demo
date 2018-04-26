@@ -121,9 +121,7 @@ Page {
         selectMultiple: false
         title: qsTr("Select a File")
 
-        onAccepted: {
-            demoPage.notify(fileUrl)
-        }
+        onAccepted: flatpakDemo.openFile(fileUrl)
     }
 
     footer: Rectangle {

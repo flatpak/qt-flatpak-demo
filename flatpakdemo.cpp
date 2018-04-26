@@ -120,6 +120,11 @@ void FlatpakDemo::openApplicationData()
                                                  QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first() + QStringLiteral("/.var/app/org.flatpak.demo/")).toString()));
 }
 
+void FlatpakDemo::openFile(const QUrl &fileName)
+{
+    QDesktopServices::openUrl(fileName.toLocalFile());
+}
+
 void FlatpakDemo::gotPrintResponse(uint response, const QVariantMap &results)
 {
     // qWarning() << "Print response: " << response << results;
