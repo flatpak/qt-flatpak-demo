@@ -122,7 +122,7 @@ void FlatpakDemo::openApplicationData()
 
 void FlatpakDemo::openFile(const QUrl &fileName)
 {
-    QDesktopServices::openUrl(fileName.toLocalFile());
+    QDesktopServices::openUrl(fileName);
 }
 
 void FlatpakDemo::gotPrintResponse(uint response, const QVariantMap &results)
