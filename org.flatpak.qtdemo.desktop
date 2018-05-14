@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=Flatpak Demo
+Name=Flatpak Qt Demo
 GenericName=Flatpak Demo
-Comment=Flatpak demo application
+Comment=Flatpak demo application written in Qt
 Exec=flatpak-demo
 Terminal=false
-Icon=org.flatpak.demo
+Icon=org.flatpak.qtdemo
 Type=Application
 X-KDE-PluginInfo-Website=http://flatpak.org
 Categories=Qt;KDE

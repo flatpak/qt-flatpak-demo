@@ -117,7 +117,7 @@ void FlatpakDemo::openApplicationData()
     QSettings setting(QLatin1String("/.flatpak-info"), QSettings::IniFormat);
     QDesktopServices::openUrl(QUrl(QStringLiteral("file://") +
                                    setting.value(QLatin1String("Instance/instance-path"),
-                                                 QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first() + QStringLiteral("/.var/app/org.flatpak.demo/")).toString()));
+                                                 QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first() + QStringLiteral("/.var/app/org.flatpak.qtdemo/")).toString()));
 }
 
 void FlatpakDemo::openFile(const QUrl &fileName)
@@ -137,7 +137,7 @@ void FlatpakDemo::gotPreparePrintResponse(uint response, const QVariantMap &resu
 {
     if (!response) {
         QDBusUnixFileDescriptor descriptor;
-        const int fd = qt_safe_open("/app/share/org.flatpak.demo/flatpak-print-cheatsheet.pdf", O_RDONLY | O_CLOEXEC);
+        const int fd = qt_safe_open("/app/share/org.flatpak.qtdemo/flatpak-print-cheatsheet.pdf", O_RDONLY | O_CLOEXEC);
         if (fd == -1) {
             qWarning() << "Failed to open flatpak cheatsheet pdf file";
             return;

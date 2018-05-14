@@ -1,5 +1,5 @@
 {
-    "app-id": "org.flatpak.demo",
+    "app-id": "org.flatpak.qtdemo",
     "runtime": "org.kde.Platform",
     "runtime-version": "5.10",
     "sdk": "org.kde.Sdk",
