@@ -12,6 +12,11 @@
   ​<releases>
 ​    <release version="1.0" type="stable" date="2018-05-09"/>
   </releases>
+  <screenshots>
+    <screenshot type="default">
+​      <image type="source">https://github.com/flatpak/qt-flatpak-demo/blob/master/assets/screenshot.png</image>
+    </screenshot>
+​  </screenshots>
   <url type="bugtracker">https://github.com/flatpak/qt-flatpak-demo/issues</url>
   <project_group>Flatpak</project_group>
   <provides>

@@ -4,29 +4,21 @@
     "runtime-version": "5.10",
     "sdk": "org.kde.Sdk",
     "command": "flatpak-demo",
-    "rename-icon": "flatpak",
     "finish-args": [
         "--share=ipc",
         "--socket=x11",
         "--socket=wayland",
-        "--filesystem=host",
         "--device=dri"
     ],
-    "build-options" : {
-        "cflags": "-O2 -g",
-        "cxxflags": "-O2 -g",
-        "env": {
-            "V": "1"
-        }
-    },
     "modules": [
         {
             "name": "flatpak-demo",
-            "cmake": true,
+            "buildsystem": "cmake-ninja",
+            "config-opts": ["-DCMAKE_BUILD_TYPE=RelWithDebInfo"],
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://github.com/grulja/flatpak-demo.git"
+                    "url": "https://github.com/flatpak/qt-flatpak-demo.git"
                 }
             ]
         }
