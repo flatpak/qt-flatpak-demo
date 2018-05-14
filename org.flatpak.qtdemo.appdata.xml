@@ -14,7 +14,7 @@
   </releases>
   <screenshots>
     <screenshot type="default">
-​      <image type="source">https://github.com/flatpak/qt-flatpak-demo/blob/master/assets/screenshot.png</image>
+​      <image type="source">https://raw.githubusercontent.com/flatpak/qt-flatpak-demo/master/assets/screenshot.png</image>
     </screenshot>
 ​  </screenshots>
   <url type="bugtracker">https://github.com/flatpak/qt-flatpak-demo/issues</url>
