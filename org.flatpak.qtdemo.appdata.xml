@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="desktop">
-  <id>org.flatpak.qtdemo.desktop</id>
+  <id>org.flatpak.qtdemo</id>
+  <launchable type="desktop-id">org.flatpak.qtdemo.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL-2.0+</project_license>
   <name>Flatpak Demo</name>
@@ -8,8 +9,11 @@
   <description>
       <p>Flatpak demo application written in Qt</p>
   </description>
-  <url type="bugtracker">https://github.com/flatpak/flatpak/issues</url>
-  <project_group>KDE</project_group>
+  ​<releases>
+​    <release version="1.0" type="stable" date="2018-05-09"/>
+  </releases>
+  <url type="bugtracker">https://github.com/flatpak/qt-flatpak-demo/issues</url>
+  <project_group>Flatpak</project_group>
   <provides>
     <binary>flatpak-demo</binary>
   </provides>
