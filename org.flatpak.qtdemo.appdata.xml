@@ -4,19 +4,26 @@
   <launchable type="desktop-id">org.flatpak.qtdemo.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL-2.0+</project_license>
-  <name>Flatpak Demo</name>
-  <summary>Flatpak Demo</summary>
+  <name>Flatpak Developer Demo</name>
+  <summary>Flatpak Developer Demo</summary>
   <description>
-      <p>Flatpak demo application written in Qt</p>
+      <p>Flatpak developer demo is a companion application to the <a href="http://docs.flatpak.org">Flatpak documentation</a>. It's written in Qt to show most common usage of portals and demonstrate how to package a Qt application which comply with the docs.</p>
   </description>
   ​<releases>
-​    <release version="1.0" type="stable" date="2018-05-09"/>
+​    <release version="1.1.1" type="stable" date="2018-05-15"/>
+​    <release version="1.1.0" type="stable" date="2018-05-14"/>
+​    <release version="1.0.0" type="stable" date="2018-05-09"/>
   </releases>
   <screenshots>
     <screenshot type="default">
 ​      <image type="source">https://raw.githubusercontent.com/flatpak/qt-flatpak-demo/master/assets/screenshot.png</image>
     </screenshot>
 ​  </screenshots>
+​  <categories>
+    <category>Documentation</category>
+​    <category>Development</category>
+​    <category>Qt</category>
+​  </categories>
   <url type="bugtracker">https://github.com/flatpak/qt-flatpak-demo/issues</url>
   <project_group>Flatpak</project_group>
   <provides>

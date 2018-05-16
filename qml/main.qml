@@ -35,7 +35,7 @@ ApplicationWindow {
     width: 800
     height: 640
     visible: true
-    title: qsTr("Flatpak Demo")
+    title: qsTr("Flatpak Developer Demo")
 
     DemoPage { id: demoPage; anchors.fill: parent }
 
