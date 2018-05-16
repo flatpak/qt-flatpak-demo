@@ -7,7 +7,9 @@
   <name>Flatpak Developer Demo</name>
   <summary>Flatpak Developer Demo</summary>
   <description>
-      <p>Flatpak developer demo is a companion application to the <a href="http://docs.flatpak.org">Flatpak documentation</a>. It's written in Qt to show most common usage of portals and demonstrate how to package a Qt application which comply with the docs.</p>
+      <p>Flatpak developer demo application is a companion to the <a href="http://docs.flatpak.org">Flatpak developer documentation</a>. It is an example of how to use Flatpak to build and distribute an application, and can be used as a reference implementation.</p>
+      <p>While the demo application uses Qt and the KDE runtime, the basic principles that it demonstrates are applicable to applications that use other runtimes and toolkits.</p>
+      <p>The application demonstrates the use of portals, showing how it is possible to securely access host functions like file choosers, notifications and screenshots. To do this, it uses the built-in support provided by the Qt toolkit. Similar support is also available for GTK.</p>
   </description>
   ​<releases>
 ​    <release version="1.1.1" type="stable" date="2018-05-15"/>
