@@ -4,19 +4,28 @@
   <launchable type="desktop-id">org.flatpak.qtdemo.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL-2.0+</project_license>
-  <name>Flatpak Demo</name>
-  <summary>Flatpak Demo</summary>
+  <name>Flatpak Developer Demo</name>
+  <summary>Flatpak Developer Demo</summary>
   <description>
-      <p>Flatpak demo application written in Qt</p>
+      <p>Flatpak developer demo application is a companion to the <a href="http://docs.flatpak.org">Flatpak developer documentation</a>. It is an example of how to use Flatpak to build and distribute an application, and can be used as a reference implementation.</p>
+      <p>While the demo application uses Qt and the KDE runtime, the basic principles that it demonstrates are applicable to applications that use other runtimes and toolkits.</p>
+      <p>The application demonstrates the use of portals, showing how it is possible to securely access host functions like file choosers, notifications and screenshots. To do this, it uses the built-in support provided by the Qt toolkit. Similar support is also available for GTK.</p>
   </description>
   ​<releases>
-​    <release version="1.0" type="stable" date="2018-05-09"/>
+​    <release version="1.1.1" type="stable" date="2018-05-15"/>
+​    <release version="1.1.0" type="stable" date="2018-05-14"/>
+​    <release version="1.0.0" type="stable" date="2018-05-09"/>
   </releases>
   <screenshots>
     <screenshot type="default">
 ​      <image type="source">https://raw.githubusercontent.com/flatpak/qt-flatpak-demo/master/assets/screenshot.png</image>
     </screenshot>
 ​  </screenshots>
+​  <categories>
+    <category>Documentation</category>
+​    <category>Development</category>
+​    <category>Qt</category>
+​  </categories>
   <url type="bugtracker">https://github.com/flatpak/qt-flatpak-demo/issues</url>
   <project_group>Flatpak</project_group>
   <provides>

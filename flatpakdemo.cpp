@@ -51,7 +51,7 @@ void FlatpakDemo::sendNotification()
 {
     KNotification *notify = new KNotification(QLatin1String("notification"), 0);
     notify->setFlags(KNotification::DefaultEvent);
-    notify->setTitle(QLatin1String("Flatpak Demo"));
+    notify->setTitle(QLatin1String("Flatpak Developer Demo"));
     notify->setText(QLatin1String("This notification was sent from a Flatpak sandbox."));
     notify->setIconName(QLatin1String("flatpak"));
 
