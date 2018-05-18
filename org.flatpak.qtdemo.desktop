@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Flatpak Developer Demo
 GenericName=Flatpak Developer Demo
-Comment=Flatpak developer demo is a companion application to the <a href="http://docs.flatpak.org">Flatpak documentation</a>. It's written in Qt to show most common usage of portals and demonstrate how to package a Qt application which comply with the docs.
+Comment=Flatpak developer demo application is a companion to the Flatpak developer documentation. It is an example of how to use Flatpak to build and distribute an application, and can be used as a reference implementation.
 Exec=flatpak-demo
 Terminal=false
 Icon=org.flatpak.qtdemo
