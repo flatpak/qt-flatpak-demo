@@ -12,7 +12,7 @@
       <p>The application demonstrates the use of portals, showing how it is possible to securely access host functions like file choosers, notifications and screenshots. To do this, it uses the built-in support provided by the Qt toolkit. Similar support is also available for GTK.</p>
   </description>
   ​<releases>
-​    <release version="1.1.1" type="stable" date="2018-05-15"/>
+​    <release version="1.1.1" type="stable" date="2018-05-18"/>
 ​    <release version="1.1.0" type="stable" date="2018-05-14"/>
 ​    <release version="1.0.0" type="stable" date="2018-05-09"/>
   </releases>
