@@ -32,7 +32,9 @@ int main(int argc, char **argv)
     QApplication::setOrganizationDomain("flatpak.org");
     QApplication::setOrganizationName("flatpak.org");
     QApplication::setApplicationName("qtdemo");
-
+    
+    QGuiApplication::setDesktopFileName("org.flatpak.qtdemo");
+    
     QQuickStyle::setStyle(QLatin1String("org.kde.desktop"));
 
     FlatpakDemo *flatpakDemo = new FlatpakDemo();
