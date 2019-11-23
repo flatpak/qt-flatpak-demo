@@ -7,4 +7,4 @@ Terminal=false
 Icon=org.flatpak.qtdemo
 Type=Application
 X-KDE-PluginInfo-Website=http://flatpak.org
-Categories=Qt;KDE
+Categories=Qt;KDE;Development
