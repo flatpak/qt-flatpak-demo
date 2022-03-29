@@ -1,7 +1,7 @@
 {
     "app-id": "org.flatpak.qtdemo",
     "runtime": "org.kde.Platform",
-    "runtime-version": "5.11",
+    "runtime-version": "5.15-21.08",
     "sdk": "org.kde.Sdk",
     "command": "flatpak-demo",
     "finish-args": [
@@ -12,46 +12,6 @@
         "--device=dri"
     ],
     "modules": [
-        {
-            "name": "openjpeg2",
-            "config-opts": ["-DCMAKE_INSTALL_LIBDIR=lib"],
-            "buildsystem": "cmake-ninja",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/uclouvain/openjpeg/archive/v2.3.0.tar.gz",
-                    "sha256": "3dc787c1bb6023ba846c2a0d9b1f6e179f1cd255172bde9eb75b01f1e6c7d71a"
-                }
-            ]
-        },
-        {
-            "name": "poppler",
-            "config-opts": ["-DENABLE_TESTING=OFF", "-DCMAKE_INSTALL_LIBDIR=lib"],
-            "buildsystem": "cmake-ninja",
-            "builddir": true,
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://poppler.freedesktop.org/poppler-0.65.0.tar.xz",
-                    "sha256": "89c8cf73f83efda78c5a9bd37c28f4593ad0e8a51556dbe39ed81e1ae2dd8f07"
-                }
-            ]
-        },
-        {
-            "name": "sqlite3",
-            "config-opts": [ "--enable-threadsafe", "--enable-threads-override-locks" ],
-            "cmake": false,
-            "build-options": {
-                "cflags": "-DSQLITE_ENABLE_UNLOCK_NOTIFY=1"
-            },
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "http://sqlite.org/2018/sqlite-autoconf-3230100.tar.gz",
-                    "sha256": "92842b283e5e744eff5da29ed3c69391de7368fccc4d0ee6bf62490ce555ef25"
-                }
-            ]
-        },
         {
             "name": "flatpak-demo",
             "buildsystem": "cmake-ninja",
