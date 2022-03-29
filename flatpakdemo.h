@@ -26,7 +26,7 @@ class FlatpakDemo : public QObject
 {
     Q_OBJECT
 public:
-    explicit FlatpakDemo(QObject *parent = 0);
+    explicit FlatpakDemo(QObject *parent = nullptr);
     virtual ~FlatpakDemo();
 
     Q_INVOKABLE void sendNotification();

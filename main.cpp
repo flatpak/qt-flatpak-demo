@@ -29,17 +29,17 @@ int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
 
-    QApplication::setOrganizationDomain("flatpak.org");
-    QApplication::setOrganizationName("flatpak.org");
-    QApplication::setApplicationName("qtdemo");
+    QApplication::setOrganizationDomain(QStringLiteral("flatpak.org"));
+    QApplication::setOrganizationName(QStringLiteral("flatpak.org"));
+    QApplication::setApplicationName(QStringLiteral("qtdemo"));
     
-    QGuiApplication::setDesktopFileName("org.flatpak.qtdemo");
+    QGuiApplication::setDesktopFileName(QStringLiteral("org.flatpak.qtdemo"));
     
-    QQuickStyle::setStyle(QLatin1String("org.kde.desktop"));
+    QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
 
     FlatpakDemo *flatpakDemo = new FlatpakDemo();
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("flatpakDemo", flatpakDemo);
+    engine.rootContext()->setContextProperty(QStringLiteral("flatpakDemo"), flatpakDemo);
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     QObject *rootObject = engine.rootObjects().first();

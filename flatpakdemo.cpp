@@ -49,23 +49,23 @@ FlatpakDemo::~FlatpakDemo()
 
 void FlatpakDemo::sendNotification()
 {
-    KNotification *notify = new KNotification(QLatin1String("notification"), 0);
+    KNotification *notify = new KNotification(QStringLiteral("notification"));
     notify->setFlags(KNotification::DefaultEvent);
-    notify->setTitle(QLatin1String("Flatpak Developer Demo"));
-    notify->setText(QLatin1String("This notification was sent from a Flatpak sandbox."));
-    notify->setIconName(QLatin1String("flatpak"));
+    notify->setTitle(QStringLiteral("Flatpak Developer Demo"));
+    notify->setText(QStringLiteral("This notification was sent from a Flatpak sandbox."));
+    notify->setIconName(QStringLiteral("flatpak"));
 
     notify->sendEvent();
 }
 
 void FlatpakDemo::printFile()
 {
-    QDBusMessage message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.portal.Desktop"),
-                                                          QLatin1String("/org/freedesktop/portal/desktop"),
-                                                          QLatin1String("org.freedesktop.portal.Print"),
-                                                          QLatin1String("PreparePrint"));
+    QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.freedesktop.portal.Desktop"),
+                                                          QStringLiteral("/org/freedesktop/portal/desktop"),
+                                                          QStringLiteral("org.freedesktop.portal.Print"),
+                                                          QStringLiteral("PreparePrint"));
     // TODO add some default configuration to verify it's read/parsed properly
-    message << QLatin1String("x11:") << QLatin1String("Prepare print") << QVariantMap() << QVariantMap() << QVariantMap{{QLatin1String("handle_token"), getRequestToken()}};
+    message << QStringLiteral("x11:") << QStringLiteral("Prepare print") << QVariantMap() << QVariantMap() << QVariantMap{{QStringLiteral("handle_token"), getRequestToken()}};
 
     QDBusPendingCall pendingCall = QDBusConnection::sessionBus().asyncCall(message);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pendingCall);
@@ -77,8 +77,8 @@ void FlatpakDemo::printFile()
         } else {
             QDBusConnection::sessionBus().connect(QString(),
                                                   reply.value().path(),
-                                                  QLatin1String("org.freedesktop.portal.Request"),
-                                                  QLatin1String("Response"),
+                                                  QStringLiteral("org.freedesktop.portal.Request"),
+                                                  QStringLiteral("Response"),
                                                   this,
                                                   SLOT(gotPreparePrintResponse(uint,QVariantMap)));
         }
@@ -87,12 +87,12 @@ void FlatpakDemo::printFile()
 
 void FlatpakDemo::takeScreenshot()
 {
-    QDBusMessage message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.portal.Desktop"),
-                                                          QLatin1String("/org/freedesktop/portal/desktop"),
-                                                          QLatin1String("org.freedesktop.portal.Screenshot"),
-                                                          QLatin1String("Screenshot"));
+    QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.freedesktop.portal.Desktop"),
+                                                          QStringLiteral("/org/freedesktop/portal/desktop"),
+                                                          QStringLiteral("org.freedesktop.portal.Screenshot"),
+                                                          QStringLiteral("Screenshot"));
     // TODO add some default configuration to verify it's read/parsed properly
-    message << QLatin1String("x11:") << QVariantMap{{QLatin1String("interactive"), true}, {QLatin1String("handle_token"), getRequestToken()}};
+    message << QStringLiteral("x11:") << QVariantMap{{QStringLiteral("interactive"), true}, {QStringLiteral("handle_token"), getRequestToken()}};
 
     QDBusPendingCall pendingCall = QDBusConnection::sessionBus().asyncCall(message);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pendingCall);
@@ -104,8 +104,8 @@ void FlatpakDemo::takeScreenshot()
         } else {
             QDBusConnection::sessionBus().connect(QString(),
                                                   reply.value().path(),
-                                                  QLatin1String("org.freedesktop.portal.Request"),
-                                                  QLatin1String("Response"),
+                                                  QStringLiteral("org.freedesktop.portal.Request"),
+                                                  QStringLiteral("Response"),
                                                   this,
                                                   SLOT(gotScreenshotResponse(uint,QVariantMap)));
         }
@@ -114,10 +114,11 @@ void FlatpakDemo::takeScreenshot()
 
 void FlatpakDemo::openApplicationData()
 {
-    QSettings setting(QLatin1String("/.flatpak-info"), QSettings::IniFormat);
+    QSettings setting(QStringLiteral("/.flatpak-info"), QSettings::IniFormat);
     QDesktopServices::openUrl(QUrl(QStringLiteral("file://") +
-                                   setting.value(QLatin1String("Instance/instance-path"),
-                                                 QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first() + QStringLiteral("/.var/app/org.flatpak.qtdemo/")).toString()));
+                                   setting.value(QStringLiteral("Instance/instance-path"),
+                                                 QStringLiteral("%1%2").arg(QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first())
+                                                                       .arg(QStringLiteral("/.var/app/org.flatpak.qtdemo/"))).toString()));
 }
 
 void FlatpakDemo::openFile(const QUrl &fileName)
@@ -127,6 +128,7 @@ void FlatpakDemo::openFile(const QUrl &fileName)
 
 void FlatpakDemo::gotPrintResponse(uint response, const QVariantMap &results)
 {
+    Q_UNUSED(results);
     // qWarning() << "Print response: " << response << results;
     if (response) {
         qWarning() << "Failed to print Flatpak Cheat Sheet";
@@ -146,12 +148,12 @@ void FlatpakDemo::gotPreparePrintResponse(uint response, const QVariantMap &resu
         descriptor.setFileDescriptor(fd);
         qt_safe_close(fd);
 
-        QDBusMessage message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.portal.Desktop"),
-                                                              QLatin1String("/org/freedesktop/portal/desktop"),
-                                                              QLatin1String("org.freedesktop.portal.Print"),
-                                                              QLatin1String("Print"));
+        QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.freedesktop.portal.Desktop"),
+                                                              QStringLiteral("/org/freedesktop/portal/desktop"),
+                                                              QStringLiteral("org.freedesktop.portal.Print"),
+                                                              QStringLiteral("Print"));
 
-        message << QLatin1String("x11:") << QLatin1String("Print dialog") << QVariant::fromValue<QDBusUnixFileDescriptor>(descriptor) << QVariantMap{{QLatin1String("handle_token"), getRequestToken()}, {QLatin1String("token"), results.value(QLatin1String("token")).toUInt()}};
+        message << QStringLiteral("x11:") << QStringLiteral("Print dialog") << QVariant::fromValue<QDBusUnixFileDescriptor>(descriptor) << QVariantMap{{QStringLiteral("handle_token"), getRequestToken()}, {QStringLiteral("token"), results.value(QStringLiteral("token")).toUInt()}};
 
         QDBusPendingCall pendingCall = QDBusConnection::sessionBus().asyncCall(message);
         QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pendingCall);
@@ -163,8 +165,8 @@ void FlatpakDemo::gotPreparePrintResponse(uint response, const QVariantMap &resu
             } else {
                 QDBusConnection::sessionBus().connect(QString(),
                                                     reply.value().path(),
-                                                    QLatin1String("org.freedesktop.portal.Request"),
-                                                    QLatin1String("Response"),
+                                                    QStringLiteral("org.freedesktop.portal.Request"),
+                                                    QStringLiteral("Response"),
                                                     this,
                                                     SLOT(gotPrintResponse(uint,QVariantMap)));
             }
@@ -178,8 +180,8 @@ void FlatpakDemo::gotScreenshotResponse(uint response, const QVariantMap &result
 {
     // qWarning() << "Screenshot response: " << response << results;
     if (!response) {
-        if (results.contains(QLatin1String("uri"))) {
-            Q_EMIT screenshotSaved(results.value(QLatin1String("uri")).toString());
+        if (results.contains(QStringLiteral("uri"))) {
+            Q_EMIT screenshotSaved(results.value(QStringLiteral("uri")).toString());
         }
     } else {
         qWarning() << "Failed to take screenshot";
@@ -189,5 +191,5 @@ void FlatpakDemo::gotScreenshotResponse(uint response, const QVariantMap &result
 QString FlatpakDemo::getRequestToken()
 {
     m_requestTokenCounter += 1;
-    return QString("u%1").arg(m_requestTokenCounter);
+    return QStringLiteral("u%1").arg(m_requestTokenCounter);
 }
