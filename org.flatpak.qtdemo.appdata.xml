@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="desktop">
   <id>org.flatpak.qtdemo</id>
+  <developer_name>FlatHub</developer_name>
   <launchable type="desktop-id">org.flatpak.qtdemo.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL-2.0+</project_license>
